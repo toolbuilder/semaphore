@@ -5,7 +5,7 @@ This library provides `Semaphore` and `Mutex` implementations. You can acquire a
 ## Installation
 
 ```bash
-npm install --save-dev @toolbuilder/semaphore
+npm install @toolbuilder/semaphore
 ```
 
 ## Use
