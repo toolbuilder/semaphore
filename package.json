@@ -25,9 +25,11 @@
   "scripts": {
     "lint:packagejson": "npmPkgJsonLint .",
     "lint:src": "eslint src test",
-    "release": "run-s uncommitted validate standard-vesion",
+    "release": "run-s uncommitted validate standard-version",
+    "standard-version": "standard-version",
     "test": "tape -r esm \"test/*.test.js\"",
     "test:packfile": "rollup --config node:@toolbuilder/rollup-config-pkgtest",
+    "uncommitted": "uncommitted",
     "validate": "run-s test:* lint:*"
   },
   "eslintConfig": {
