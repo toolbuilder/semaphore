@@ -43,14 +43,14 @@
     "@toolbuilder/eslint-config": "0.1.4",
     "@toolbuilder/package-json-lint-config": "0.1.0",
     "@toolbuilder/rollup-config-pkgtest": "0.1.2",
-    "eslint": "7.5.0",
+    "eslint": "7.30.0",
     "npm-package-json-lint": "5.1.0",
     "npm-run-all": "4.1.5",
-    "rollup": "2.22.1",
-    "standard-version": "8.0.2",
-    "tape": "5.0.1",
+    "rollup": "2.53.2",
+    "standard-version": "9.3.1",
+    "tape": "5.2.2",
     "uncommitted": "1.0.0",
-    "zora": "4.0.0"
+    "zora": "4.1.0"
   },
   "npmpackagejsonlint": {
     "extends": "@toolbuilder/package-json-lint-config"
