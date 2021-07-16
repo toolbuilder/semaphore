@@ -22,7 +22,7 @@ Promise based semaphore.
 
 ### available
 
-Returns the number of available locks remaining.
+  Returns whether a lock is available. If one is available, acquireSync will succeed.
 
 ### acquireSync
 
@@ -38,7 +38,7 @@ Returns **[Promise][15]** promise resolves when a lock has been acquired.
 
 ### release
 
-Releases a lock so that it is available to be acquired.
+Releases a lock so that it is available to be acquired. Each acquire or acquireSync call must be matched by exactly one release call.
 
 ## Mutex
 

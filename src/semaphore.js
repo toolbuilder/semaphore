@@ -14,7 +14,9 @@ export class Semaphore {
   }
 
   /**
-   * Returns the number of available locks remaining.
+   * Returns whether a lock is available. If one is available,
+   * acquireSync will succeed.
+   * @returns {Boolean} - true if a lock is available, false otherwise
    */
   available () { return !(this._active >= this._max) }
 
@@ -46,6 +48,7 @@ export class Semaphore {
 
   /**
    * Releases a lock so that it is available to be acquired.
+   * Each acquire or acquireSync call must be matched by exactly one release call.
    */
   release () {
     this._active--
