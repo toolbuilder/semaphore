@@ -7,7 +7,6 @@ specifiers:
   '@toolbuilder/package-json-lint-config': 0.1.0
   '@toolbuilder/rollup-plugin-test-tools': ^0.1.0
   eslint: 7.30.0
-  esm: 3.2.25
   npm-package-json-lint: 5.1.0
   npm-run-all: 4.1.5
   rollup: 2.53.2
@@ -16,9 +15,6 @@ specifiers:
   tap-nirvana: ^1.1.0
   uncommitted: 1.0.0
   zora: 4.1.0
-
-dependencies:
-  esm: 3.2.25
 
 devDependencies:
   '@rollup/plugin-node-resolve': 13.0.2_rollup@2.53.2
@@ -962,6 +958,7 @@ packages:
   /esm/3.2.25:
     resolution: {integrity: sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==}
     engines: {node: '>=6'}
+    dev: true
 
   /espree/7.3.1:
     resolution: {integrity: sha512-v3JCNCE64umkFpmkFGqzVKsOT0tN1Zr+ueqLZfpV1Ob8e+CEgPWa+OxCoGH3tnhimMKIaBm4m/vaRpJ/krRz2g==}
