@@ -1,6 +1,6 @@
 import { test } from 'zora'
-import { Mutex } from '../src/index'
-import { wait } from './wait'
+import { Mutex } from '../src/index.js'
+import { wait } from './wait.js'
 
 const isFunction = object => object && typeof (object) === 'function'
 

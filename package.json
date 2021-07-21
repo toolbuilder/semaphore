@@ -17,38 +17,51 @@
     "url": "https://github.com/toolbuilder/semaphore.git"
   },
   "license": "MIT",
-  "main": "index.js",
+  "type": "module",
+  "main": "cjs/index.js",
   "module": "src/index.js",
+  "exports": {
+    "import": "./src/index.js",
+    "require": "./cjs/index.js"
+  },
   "files": [
+    "cjs",
     "src"
   ],
   "scripts": {
-    "check": "run-s check:*",
+    "build": "rollup -c rollup.config.js",
+    "check": "run-s build check:*",
     "check:packagejson": "npmPkgJsonLint .",
-    "check:packfile": "rollup --config node:@toolbuilder/rollup-config-pkgtest",
+    "check:packfile": "rollup -c rollup.config.test.js",
     "check:src": "eslint src test",
     "check:test": "run-s test",
     "check:uncommitted": "uncommitted",
     "prerelease": "run-s check",
-    "release": "standard-version -t",
-    "test": "tape -r esm \"test/*test.js\""
+    "release": "standard-version",
+    "test": "esm-tape-runner 'test/**/*test.js' | tap-nirvana"
   },
   "eslintConfig": {
-    "extends": "@toolbuilder/eslint-config"
+    "extends": "@toolbuilder/eslint-config",
+    "ignorePatterns": [
+      "cjs"
+    ]
   },
   "dependencies": {
     "esm": "3.2.25"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.2",
+    "@small-tech/esm-tape-runner": "^1.0.3",
     "@toolbuilder/eslint-config": "0.1.4",
     "@toolbuilder/package-json-lint-config": "0.1.0",
-    "@toolbuilder/rollup-config-pkgtest": "0.1.2",
+    "@toolbuilder/rollup-plugin-test-tools": "^0.1.0",
     "eslint": "7.30.0",
     "npm-package-json-lint": "5.1.0",
     "npm-run-all": "4.1.5",
     "rollup": "2.53.2",
+    "rollup-plugin-multi-input": "^1.3.1",
     "standard-version": "9.3.1",
-    "tape": "5.2.2",
+    "tap-nirvana": "^1.1.0",
     "uncommitted": "1.0.0",
     "zora": "4.1.0"
   },

@@ -1,6 +1,6 @@
 import { test } from 'zora'
-import { Semaphore } from '../src/index'
-import { wait } from './wait'
+import { Semaphore } from '../src/index.js'
+import { wait } from './wait.js'
 
 const times = (n, fn) => {
   for (let i = 0; i < n; ++i) {

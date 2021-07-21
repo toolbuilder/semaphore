@@ -1,2 +1,2 @@
-export { Semaphore } from './semaphore'
-export { Mutex } from './mutex'
+export { Semaphore } from './semaphore.js'
+export { Mutex } from './mutex.js'

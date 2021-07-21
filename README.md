@@ -24,6 +24,6 @@ release() // to release mutex
 import { Mutex, Semaphore } from '@toolbuilder/semaphore'
 
 const semaphore = new Semaphore(5) // max locks that can be acquired
-const release = await semaphore.acquire()
-release() // to release lock
+await semaphore.acquire()
+semaphore.release() // to release lock
 ```
