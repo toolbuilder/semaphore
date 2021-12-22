@@ -1,5 +1,3 @@
-import resolve from '@rollup/plugin-node-resolve'
-
 /**
  * Builds the CommonJS code used to support CommonJS users. Since the package is stateless,
  * the CommonJS code can be completely separate without creating a dual package hazard.
@@ -12,9 +10,6 @@ export default [
     output: {
       dir: 'cjs',
       format: 'cjs'
-    },
-    plugins: [
-      resolve()
-    ]
+    }
   }
 ]

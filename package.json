@@ -47,7 +47,6 @@
     ]
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^13.0.2",
     "@small-tech/esm-tape-runner": "^1.0.3",
     "@toolbuilder/eslint-config": "0.1.4",
     "@toolbuilder/package-json-lint-config": "0.1.0",
