@@ -1,5 +1,10 @@
 import { Semaphore } from './semaphore.js'
 
+/**
+ * @function
+ * @param {import('./semaphore.js').Resolver} fn - function to call only once
+ * @returns {() => void}
+ */
 const once = fn => {
   let alreadyCalled = false
   return () => {
@@ -19,19 +24,20 @@ const once = fn => {
  */
 export class Mutex {
   constructor () {
+    /** @private */
     this._semaphore = new Semaphore(1)
   }
 
   /**
    * Determine if the lock is available.
-   * @returns {Boolean} - true if lock is available, false otherwise
+   * @returns {boolean} - true if lock is available, false otherwise
    */
   available () { return this._semaphore.available() }
 
   /**
    * Get a lock if available.
    *
-   * @returns {null|Function} - if the lock is available, returns a
+   * @returns {() => void} - if the lock is available, returns a
    * function to release it. Otherwise returns null. The release function can
    * be called multiple times, it will only release once.
    * @example
@@ -46,7 +52,7 @@ export class Mutex {
 
   /**
    * Acquire a lock.
-   * @returns {Promise} - returns a Promise that resolves to a release function. The release
+   * @returns {PromiseLike<() => void>} - returns a Promise that resolves to a release function. The release
    * function can be called multiple times, it will only release once.
    */
   acquire () {

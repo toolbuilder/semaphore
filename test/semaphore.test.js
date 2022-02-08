@@ -1,13 +1,13 @@
 import { test } from 'zora'
 import { Semaphore } from '../src/index.js'
-import { wait } from './wait.js'
+import { times, wait } from './shared.js'
 
-const times = (n, fn) => {
-  for (let i = 0; i < n; ++i) {
-    fn()
-  }
-}
-
+/**
+ * @function
+ * @param {Semaphore} lock
+ * @param {number} threadTime
+ * @returns {{state: import('./shared.js').State, thread: () => PromiseLike<void>}}
+ */
 const makeTestHarness = (lock, threadTime) => {
   let idSequence = 0
   const state = { started: 0, atOnce: 0, running: 0, ended: 0 }

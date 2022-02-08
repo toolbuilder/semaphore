@@ -1,28 +1,38 @@
 /**
+ * @typedef {() => void} Resolver
+ */
+
+/**
  * Promise based semaphore.
  */
 export class Semaphore {
   /**
    * Create a semaphore.
    *
-   * @param {Number} max - maximum number of locks that can be acquired at any given time
+   * @param {number} [max] - maximum number of locks that can be acquired at any given time
    */
   constructor (max = 1) {
+    /** @private */
     this._max = max
+    /** @private */
     this._active = 0
+    /**
+     * @private
+     * @type {Resolver[]}
+     */
     this._resolvers = [] // when locked, each acquire requires a new promise
   }
 
   /**
    * Returns whether a lock is available. If one is available,
    * acquireSync will succeed.
-   * @returns {Boolean} - true if a lock is available, false otherwise
+   * @returns {boolean} - true if a lock is available, false otherwise
    */
   available () { return !(this._active >= this._max) }
 
   /**
    * Acquires a lock synchronously.
-   * @returns {Boolean} - true if lock was acquired, false otherwise
+   * @returns {boolean} - true if lock was acquired, false otherwise
    */
   acquireSync () {
     if (this._active >= this._max) return false
@@ -32,7 +42,7 @@ export class Semaphore {
 
   /**
    * Acquires a lock asynchronously.
-   * @returns {Promise} - promise resolves when a lock has been acquired.
+   * @returns {PromiseLike<void>} - promise resolves when a lock has been acquired.
    */
   acquire () {
     this._active++
@@ -42,18 +52,19 @@ export class Semaphore {
       this._resolvers.push(resolver)
       return promise
     } else {
-      return Promise.resolve(true)
+      return Promise.resolve()
     }
   }
 
   /**
    * Releases a lock so that it is available to be acquired.
    * Each acquire or acquireSync call must be matched by exactly one release call.
+   * @returns {void}
    */
   release () {
     this._active--
     if (this._resolvers.length > 0) {
-      this._resolvers.shift()(true) // let awaiting code run by resolving a promise
+      this._resolvers.shift()() // let awaiting code run by resolving a promise
     }
   }
 }
