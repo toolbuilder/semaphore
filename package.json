@@ -22,6 +22,7 @@
   "main": "cjs/index.js",
   "module": "src/index.js",
   "exports": {
+    "types": "./src/index.d.ts",
     "import": "./src/index.js",
     "require": "./cjs/index.js"
   },
@@ -55,15 +56,15 @@
   "devDependencies": {
     "@toolbuilder/eslint-config": "0.1.5",
     "@toolbuilder/package-json-lint-config": "0.1.0",
-    "@toolbuilder/rollup-plugin-test-tools": "^1.0.0",
-    "eslint": "8.8.0",
-    "npm-package-json-lint": "5.4.2",
+    "@toolbuilder/rollup-plugin-test-tools": "^1.1.0",
+    "eslint": "8.47.0",
+    "npm-package-json-lint": "7.0.0",
     "npm-run-all": "4.1.5",
-    "pta": "^1.0.2",
-    "rimraf": "^3.0.2",
-    "rollup": "2.67.1",
-    "standard-version": "9.3.2",
-    "typescript": "^4.5.5",
+    "pta": "^1.2.0",
+    "rimraf": "^5.0.1",
+    "rollup": "3.28.0",
+    "standard-version": "9.5.0",
+    "typescript": "^5.1.6",
     "uncommitted": "1.0.0",
     "zora": "5.0.3"
   },
