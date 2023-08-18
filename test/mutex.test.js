@@ -1,5 +1,6 @@
 import { test } from 'zora'
-import { Mutex } from '../src/index.js'
+// @ts-ignore
+import { Mutex } from '@toolbuilder/semaphore'
 import { times, wait } from './shared.js'
 
 const isFunction = object => object && typeof (object) === 'function'

@@ -1,5 +1,6 @@
 import { test } from 'zora'
-import { Semaphore } from '../src/index.js'
+// @ts-ignore
+import { Semaphore } from '@toolbuilder/semaphore'
 import { times, wait } from './shared.js'
 
 /**
