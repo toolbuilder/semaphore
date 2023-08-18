@@ -1,6 +1,6 @@
 {
   "name": "@toolbuilder/semaphore",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Basic semaphore and mutex with both sync and async acquire methods.",
   "keywords": [
     "semaphore",
