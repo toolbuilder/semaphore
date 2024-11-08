@@ -48,10 +48,10 @@
     "test": "pta --reporter tap 'test/**/*test.js'"
   },
   "devDependencies": {
-    "@toolbuilder/package-json-lint-config": "0.1.0",
+    "@toolbuilder/package-json-lint-config": "0.1.1",
     "@toolbuilder/rollup-plugin-test-tools": "^1.1.0",
     "commit-and-tag-version": "^12.5.0",
-    "npm-package-json-lint": "7.0.0",
+    "npm-package-json-lint": "8.0.0",
     "npm-run-all2": "7.0.1",
     "pta": "^1.2.0",
     "rimraf": "^5.0.1",
