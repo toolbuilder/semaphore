@@ -44,19 +44,19 @@
     "check:types": "tsc --project test/tsconfig.json",
     "check:uncommitted": "uncommitted",
     "prerelease": "run-s check",
-    "release": "standard-version",
+    "release": "commit-and-tag-version",
     "test": "pta --reporter tap 'test/**/*test.js'"
   },
   "devDependencies": {
     "@toolbuilder/package-json-lint-config": "0.1.0",
     "@toolbuilder/rollup-plugin-test-tools": "^1.1.0",
+    "commit-and-tag-version": "^12.5.0",
     "npm-package-json-lint": "7.0.0",
     "npm-run-all": "4.1.5",
     "pta": "^1.2.0",
     "rimraf": "^5.0.1",
     "rollup": "3.28.0",
     "standard": "^17.1.2",
-    "standard-version": "9.5.0",
     "typescript": "^5.1.6",
     "uncommitted": "1.0.0",
     "zora": "5.0.3"
