@@ -36,10 +36,11 @@
     "test": "node --test 'test/**/*.test.js'",
     "check": "pnpm run check:types && pnpm run build && pnpm test",
     "validate:package": "npx -y publint && npx -y @arethetypeswrong/cli --pack . --profile esm-only",
-    "release": "npx -y commit-and-tag-version"
+    "release": "changelogen --release"
   },
   "devDependencies": {
     "@types/node": "^26.6.3",
+    "changelogen": "^0.6.2",
     "typescript": "^5.6.3"
   }
 }
