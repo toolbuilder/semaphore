@@ -1,5 +1,5 @@
-import { test } from 'zora'
-// @ts-ignore
+import test from 'node:test'
+import assert from 'node:assert/strict'
 import { Semaphore } from '@toolbuilder/semaphore'
 import { times, wait } from './shared.js'
 
@@ -28,7 +28,7 @@ const makeTestHarness = (lock, threadTime) => {
   return { state, thread }
 }
 
-test('semaphore: as lock', async assert => {
+test('semaphore: as lock', async () => {
   const threadTime = 100
   const lock = new Semaphore()
   const { state, thread } = makeTestHarness(lock, threadTime)
@@ -44,7 +44,7 @@ test('semaphore: as lock', async assert => {
   assert.equal(state.atOnce, 1, 'only one thread ran at once')
 })
 
-test('semaphore: thread pool', async assert => {
+test('semaphore: thread pool', async () => {
   const threadTime = 100
   const atOnce = 3
   const lock = new Semaphore(atOnce)
@@ -61,7 +61,7 @@ test('semaphore: thread pool', async assert => {
   assert.equal(state.atOnce, atOnce, `only ${atOnce} threads ran at once`)
 })
 
-test('semaphore: acquireSync', async assert => {
+test('semaphore: acquireSync', async () => {
   const threadTime = 100
   const atOnce = 3
   const lock = new Semaphore(atOnce)

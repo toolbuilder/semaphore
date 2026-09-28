@@ -47,10 +47,7 @@ export class Semaphore {
   acquire () {
     this._active++
     if (this._active > this._max) {
-      let resolver
-      const promise = new Promise(resolve => (resolver = resolve))
-      this._resolvers.push(resolver)
-      return promise
+      return new Promise(resolve => this._resolvers.push(resolve))
     } else {
       return Promise.resolve()
     }
@@ -63,8 +60,7 @@ export class Semaphore {
    */
   release () {
     this._active--
-    if (this._resolvers.length > 0) {
-      this._resolvers.shift()() // let awaiting code run by resolving a promise
-    }
+    const resolver = this._resolvers.shift()
+    if (resolver) resolver() // let awaiting code run by resolving a promise
   }
 }

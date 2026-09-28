@@ -37,7 +37,7 @@ export class Mutex {
   /**
    * Get a lock if available.
    *
-   * @returns {() => void} - if the lock is available, returns a
+   * @returns {(() => void) | null} - if the lock is available, returns a
    * function to release it. Otherwise returns null. The release function can
    * be called multiple times, it will only release once.
    * @example

@@ -1,5 +1,5 @@
-import { test } from 'zora'
-// @ts-ignore
+import test from 'node:test'
+import assert from 'node:assert/strict'
 import { Mutex } from '@toolbuilder/semaphore'
 import { times, wait } from './shared.js'
 
@@ -31,7 +31,7 @@ const makeTestHarness = (lock, threadTime) => {
   return { state, thread }
 }
 
-test('mutex: acquire', async assert => {
+test('mutex: acquire', async () => {
   const threadTime = 50
   const lock = new Mutex()
   const { state, thread } = makeTestHarness(lock, threadTime)
@@ -47,13 +47,14 @@ test('mutex: acquire', async assert => {
   assert.equal(state.atOnce, 1, 'only one thread ran at once')
 })
 
-test('mutex: acquireSync', async assert => {
+test('mutex: acquireSync', async () => {
   const mutex = new Mutex()
 
   assert.ok(mutex.available(), 'mutex is available before first acquireSync')
   const release = mutex.acquireSync()
-  assert.ok(isFunction(release), 'first acquireSync returns release function')
-  assert.notOk(mutex.available(), 'mutex is not avaialble after first acquireSync')
+  assert.ok(release != null, 'first acquireSync returns release function')
+  assert.ok(isFunction(release), 'release is a function')
+  assert.ok(!mutex.available(), 'mutex is not avaialble after first acquireSync')
   assert.equal(mutex.acquireSync(), null, 'second acquireSync returns null')
 
   release()
