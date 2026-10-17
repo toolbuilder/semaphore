@@ -30,6 +30,8 @@ semaphore.release() // to release lock
 
 ## Contributing
 
+At this point, I have no intention of further changes to the API. Any updates to devDependencies will be infrequent.
+
 Contributions are welcome. Please create a pull request.
 
 * I use [pnpm](https://pnpm.js.org/) instead of npm.
