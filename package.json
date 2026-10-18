@@ -1,6 +1,6 @@
 {
   "name": "@toolbuilder/semaphore",
-  "version": "0.1.7",
+  "version": "1.0.0",
   "description": "Basic semaphore and mutex with both sync and async acquire methods.",
   "keywords": [
     "semaphore",
@@ -36,7 +36,7 @@
     "test": "node --test 'test/**/*.test.js'",
     "check": "pnpm run check:types && pnpm run build && pnpm test",
     "validate:package": "npx -y publint && npx -y @arethetypeswrong/cli --pack . --profile esm-only",
-    "release": "changelogen --release"
+    "release": "changelogen --release --no-github"
   },
   "devDependencies": {
     "@types/node": "^26.6.3",
