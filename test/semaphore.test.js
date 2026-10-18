@@ -87,3 +87,69 @@ test('semaphore: acquireSync', async () => {
   assert.equal(state.ended, 10, 'all threads ran and ended')
   assert.equal(state.atOnce, atOnce, `only ${atOnce} threads ran at once`)
 })
+
+test('semaphore: FIFO wakeup order', async () => {
+  const lock = new Semaphore(2)
+  /** @type {number[]} */
+  const order = []
+
+  const runTask = async (/** @type {number} */ id) => {
+    await lock.acquire()
+    order.push(id)
+    lock.release()
+  }
+
+  // Hold both permits initially so subsequent acquires must queue
+  assert.equal(lock.acquireSync(), true)
+  assert.equal(lock.acquireSync(), true)
+
+  const tasks = [1, 2, 3, 4, 5].map(id => runTask(id))
+
+  // Release initial permits one by one
+  lock.release()
+  lock.release()
+
+  await Promise.all(tasks)
+  assert.deepEqual(order, [1, 2, 3, 4, 5], 'queued acquires resolve in strict FIFO order')
+})
+
+test('semaphore: no barging across acquire and release microtask boundaries', async () => {
+  const lock = new Semaphore(1)
+  /** @type {string[]} */
+  const events = []
+
+  // 1. Immediate acquire() reserves the permit synchronously before its microtask runs
+  const firstAcquire = lock.acquire().then(() => {
+    events.push('first acquired')
+  })
+  assert.equal(lock.available(), false, 'lock is unavailable synchronously after acquire()')
+  assert.equal(lock.acquireSync(), false, 'acquireSync cannot steal permit before first acquire microtask runs')
+
+  // 2. Queue a second async waiter while first holds the permit
+  const secondAcquire = lock.acquire().then(() => {
+    events.push('second acquired')
+  })
+
+  await firstAcquire
+  assert.deepEqual(events, ['first acquired'])
+
+  // 3. Release first permit while second waiter is queued; synchronous calls before
+  //    secondAcquire's microtask runs must not barge ahead of secondAcquire
+  lock.release()
+  assert.equal(lock.available(), false, 'lock remains unavailable synchronously after release() when waiter is queued')
+  assert.equal(lock.acquireSync(), false, 'acquireSync cannot barge ahead of queued waiter after release()')
+
+  const thirdAcquire = lock.acquire().then(() => {
+    events.push('third acquired')
+  })
+
+  await secondAcquire
+  assert.deepEqual(events, ['first acquired', 'second acquired'], 'second waiter acquires before third')
+
+  lock.release()
+  await thirdAcquire
+  assert.deepEqual(events, ['first acquired', 'second acquired', 'third acquired'])
+
+  lock.release()
+  assert.equal(lock.available(), true, 'lock is available once all waiters have released')
+})
